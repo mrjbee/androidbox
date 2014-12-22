@@ -23,16 +23,16 @@ project root
    | -- build.gradle
    | -- settings.gradle 
 ```   
-If you are using Git best choice would bit to execute (if not just copy content of repo to your project):
+If you are using Git best choice would be to execute following
 ```sh
 git submodule add https://github.com/mrjbee/androidbox.git androidbox
 ```
-Now add `:androidbox` to settings.gradle 
+if not just copy content of repo to your project. Next add `:androidbox` to settings.gradle 
 
 ```groovy
 include ':app', ':androidbox'
 ```
-and app/build.gradle:
+and app/build.gradle
 ```groovy
 dependencies {
     compile project(':androidbox')
