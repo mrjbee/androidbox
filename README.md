@@ -10,7 +10,8 @@ Insatllation
 ----------
 Below described installation steps based on default Android Studion gradle project. In case you structure is differnet you could use below steps as a reference but adopt it to your needs (hope it will be not too much difficult)
 Add sources to your android project in androidbox folder right after your root folder so your structure would look like so:
-  <project root>
+```
+project root
    |-- app
    |     | -- src
    |     | -- build.gradle
@@ -21,7 +22,7 @@ Add sources to your android project in androidbox folder right after your root f
    |     | -- ...
    | -- build.gradle
    | -- settings.gradle 
-   
+```   
 If you are using Git best choice would bit to execute (if not just copy content of repo to your project):
 ```sh
 git submodule add https://github.com/mrjbee/androidbox.git androidbox
