@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.View;
 import android.widget.GridView;
 
 public class PushToGridView extends GridView implements PushTouchDelegate.PushDelegateOwner{
@@ -59,7 +60,13 @@ public class PushToGridView extends GridView implements PushTouchDelegate.PushDe
 
     @Override
     public boolean isScrollTopReached() {
-        return getFirstVisiblePosition() == 0;
+        View c = getChildAt(0);
+        float scrollYPx = 0;
+        if (c == null) scrollYPx =0;
+        else {
+            scrollYPx = -c.getTop() + getFirstVisiblePosition() * c.getHeight();
+        }
+        return scrollYPx == 0;
     }
 
 }
