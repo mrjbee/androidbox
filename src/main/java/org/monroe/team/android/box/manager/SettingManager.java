@@ -22,7 +22,7 @@ public class SettingManager {
     }
 
     public <Type> void unset(SettingItem<Type> item){
-        item.set(preferences,null);
+        set(item,null);
     }
 
     public <Type> boolean has(SettingItem<Type> item){
@@ -32,7 +32,7 @@ public class SettingManager {
     public <Type> Type getAndSet(SettingItem<Type> item, Type value){
         Type answer = item.getOrDefault(preferences);
         if (answer != value){
-            item.set(preferences,value);
+            set(item,value);
         }
         return answer;
     }
