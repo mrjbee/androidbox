@@ -24,12 +24,16 @@ public abstract class Model {
         serviceRegistry.registrate(BackgroundTaskManager.class,backgroundTaskManager);
         serviceRegistry.registrate(Context.class,context);
         serviceRegistry.registrate(Model.class, this);
-        SharedPreferences sharedPreferences = context.getSharedPreferences(appName+"_Preferences", Context.MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getPreferencesForSettings(appName, context);
         SettingManager settingManager = new SettingManager(sharedPreferences);
         EventMessenger messenger = new EventMessenger(context);
         serviceRegistry.registrate(SettingManager.class, settingManager);
         serviceRegistry.registrate(EventMessenger.class, messenger);
         constructor(appName, context, serviceRegistry);
+    }
+
+    protected SharedPreferences getPreferencesForSettings(String appName, Context context) {
+        return context.getSharedPreferences(appName+"_Preferences", Context.MODE_PRIVATE);
     }
 
     protected void constructor(String appName, Context context, ServiceRegistry serviceRegistry){}

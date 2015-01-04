@@ -77,7 +77,9 @@ public class SettingManager {
 
         private Type get(SharedPreferences preferences){
             if (!preferences.contains(id)) return null;
-            if (valueClass == Integer.class){
+            if (valueClass == String.class){
+                return (Type) preferences.getString(id,"");
+            }else if (valueClass == Integer.class){
                 return (Type)(Integer) preferences.getInt(id,0);
             } else if (valueClass == Float.class){
                 return (Type)(Float) preferences.getFloat(id, 0);
