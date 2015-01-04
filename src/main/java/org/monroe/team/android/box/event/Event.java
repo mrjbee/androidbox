@@ -51,6 +51,7 @@ public abstract class Event<DataType>{
             for (BroadcastReceiver receiver : registerMap.get(owner)) {
                 context.unregisterReceiver(receiver);
             }
+            registerMap.get(owner).clear();
         }
     }
 
