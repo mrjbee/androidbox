@@ -21,6 +21,15 @@ public class DateUtils {
         }
     }
 
+    public static Date monthOnly(Date now) {
+        SimpleDateFormat formatter = new SimpleDateFormat("MM/yyyy");
+        try {
+            return formatter.parse(formatter.format(now));
+        } catch (ParseException e) {
+            throw new RuntimeException();
+        }
+    }
+
 
     public static Date mathDays(Date date, int daysCount) {
         Calendar cal = Calendar.getInstance();
@@ -63,4 +72,6 @@ public class DateUtils {
     public static long asMinutes(long ms) {
         return ms/(60*1000);
     }
+
+
 }

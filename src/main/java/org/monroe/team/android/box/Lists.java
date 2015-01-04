@@ -1,5 +1,7 @@
 package org.monroe.team.android.box;
 
+import org.monroe.team.android.box.db.DAOSupport;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,5 +32,9 @@ public class Lists {
                 return;
             }
         }
+    }
+
+    public static <ElemType> ElemType getLast(List<ElemType> list) {
+        return list.get(list.size()-1);
     }
 }
