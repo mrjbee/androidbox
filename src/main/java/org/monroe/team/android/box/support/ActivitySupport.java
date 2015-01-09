@@ -1,9 +1,14 @@
 package org.monroe.team.android.box.support;
 
 import android.app.Application;
+import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.ListView;
+
+import org.monroe.team.android.box.R;
+import org.monroe.team.android.box.utils.DisplayUtils;
 
 
 public abstract class ActivitySupport <AppType extends Application> extends android.app.Activity{
@@ -42,4 +47,20 @@ public abstract class ActivitySupport <AppType extends Application> extends andr
             }
         }.start();
     }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putBoolean("not_first_run", true);
+    }
+
+    final public boolean isFirstRun(Bundle state){
+        if (state == null) return true;
+        return !state.getBoolean("not_first_run", false);
+    }
+
+    final public boolean isLandscape(Class rBool){
+       return DisplayUtils.isLandscape(getResources(), rBool);
+    }
+
 }
