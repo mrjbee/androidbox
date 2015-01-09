@@ -63,4 +63,11 @@ public abstract class ActivitySupport <AppType extends Application> extends andr
        return DisplayUtils.isLandscape(getResources(), rBool);
     }
 
+
+    public <ResultType> ResultType getFromIntent(String key, ResultType defValue) {
+        if (getIntent() == null || getIntent().getExtras() == null) return defValue;
+        Object obj = getIntent().getExtras().get(key);
+        return (obj == null) ? defValue: (ResultType) obj;
+    }
+
 }
