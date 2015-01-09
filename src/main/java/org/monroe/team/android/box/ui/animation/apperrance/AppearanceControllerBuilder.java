@@ -133,6 +133,41 @@ public final class AppearanceControllerBuilder<TypeValue> {
         };
     }
 
+    public static TypeBuilder<Float> scale(final float showValue, final float toValue){
+        return new TypeBuilder<Float>() {
+            @Override
+            public DefaultAppearanceController.ValueGetter<Float> buildValueGetter() {
+                return new DefaultAppearanceController.ValueGetter<Float>() {
+                    @Override
+                    public Float getShowValue() {
+                        return showValue;
+                    }
+
+                    @Override
+                    public Float getHideValue() {
+                        return toValue;
+                    }
+
+                    @Override
+                    public Float getCurrentValue(View view) {
+                        return view.getScaleX();
+                    }
+                };
+            }
+
+            @Override
+            public TypedValueSetter<Float> buildValueSetter() {
+                return new TypedValueSetter<Float>(Float.class) {
+                    @Override
+                    public void setValue(View view, Float value) {
+                        view.setScaleX(value);
+                        view.setScaleY(value);
+                    }
+                };
+            }
+        };
+    }
+
 
     public static TypeBuilder<Integer> heightSlide(final int showValue, final int hideValue){
         return new TypeBuilder<Integer>() {

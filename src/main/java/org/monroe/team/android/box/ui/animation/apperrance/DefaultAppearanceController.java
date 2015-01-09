@@ -16,6 +16,7 @@ public class DefaultAppearanceController implements AppearanceController {
     private final int visibilityOnHide;
 
     private Animator currentAnimator;
+    private Boolean stateShowing = null;
 
     public <AnimatedValueType> DefaultAppearanceController(View animatedView,
                                        ValueGetter<AnimatedValueType> valueGetter,
@@ -44,7 +45,9 @@ public class DefaultAppearanceController implements AppearanceController {
 
     @Override
     public void showAndCustomize(AnimatorCustomization customization) {
+        if (Boolean.TRUE.equals(stateShowing))return;
         cancelCurrentAnimator();
+        stateShowing = Boolean.TRUE;
         if (valueGetter.getCurrentValue(animatedView) == valueGetter.getShowValue()){
             showWithoutAnimation();
             return;
@@ -73,6 +76,10 @@ public class DefaultAppearanceController implements AppearanceController {
 
     @Override
     public void hideAndCustomize(AnimatorCustomization customization) {
+        if (Boolean.FALSE.equals(stateShowing))return;
+        cancelCurrentAnimator();
+        stateShowing = Boolean.FALSE;
+
         cancelCurrentAnimator();
         if (valueGetter.getCurrentValue(animatedView) == valueGetter.getHideValue()){
             hideWithoutAnimation();
@@ -100,6 +107,7 @@ public class DefaultAppearanceController implements AppearanceController {
         cancelCurrentAnimator();
         valueSetter.setValue(animatedView, valueGetter.getShowValue());
         animatedView.setVisibility(View.VISIBLE);
+        stateShowing = null;
     }
 
     @Override
@@ -107,6 +115,7 @@ public class DefaultAppearanceController implements AppearanceController {
         cancelCurrentAnimator();
         valueSetter.setValue(animatedView, valueGetter.getHideValue());
         animatedView.setVisibility(visibilityOnHide);
+        stateShowing = null;
     }
 
     @Override
