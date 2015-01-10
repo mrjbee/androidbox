@@ -13,6 +13,23 @@ import org.monroe.team.android.box.utils.DisplayUtils;
 
 public abstract class ActivitySupport <AppType extends Application> extends android.app.Activity{
 
+    private boolean noAnimation = false;
+
+
+
+    final public void requestNoAnimation(){noAnimation = true;}
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        if (noAnimation) overridePendingTransition(0, 0);
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    protected void onPause() {
+        if (noAnimation) overridePendingTransition(0, 0);
+        super.onPause();
+    }
 
     public <ViewType extends View> ViewType view(int resourceId, Class<ViewType> viewType){
         return (ViewType) findViewById(resourceId);
